@@ -2,8 +2,6 @@
 #
 # Startup mosh connect over proxy
 
-set -x
-
 user=
 host=
 port=
