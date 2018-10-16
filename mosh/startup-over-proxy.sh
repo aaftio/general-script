@@ -75,7 +75,12 @@ else
   host_str="$host"
 fi
 
-mosh_data=$(ssh -t -o ProxyCommand="$proxy_command" $host_str mosh-server new | grep '^MOSH' | tr -d '\r\n')
+port_str=''
+if [ -n "$port" ]; then
+  port_str="-p $port"
+fi
+
+mosh_data=$(ssh -t -o ProxyCommand="$proxy_command" $host_str $port_str mosh-server new | grep '^MOSH' | tr -d '\r\n')
 
 mosh_port="$(echo -n "$mosh_data" | cut -s -d' ' -f3)"
 mosh_key="$(echo -n "$mosh_data" | cut -s -d' ' -f4)"
